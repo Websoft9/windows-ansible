@@ -1,0 +1,12 @@
+# 数据库密码
+mysql_password: 4EuG9UtDvJVb
+
+# WAMP 版本需要定时更新
+wamp_meta:
+    "74": 
+      download: "https://downloads.bitnami.com/files/stacks/wampstack/7.2.30-0/bitnami-wampstack-7.2.30-0-windows-x64-installer.exe"
+    "73": 
+      download: "https://downloads.bitnami.com/files/stacks/wampstack/7.3.17-0/bitnami-wampstack-7.3.17-0-windows-x64-installer.exe"
+    "72": 
+      download: "https://downloads.bitnami.com/files/stacks/wampstack/7.2.22-0/bitnami-wampstack-7.2.22-0-windows-x64-installer.exe"
+

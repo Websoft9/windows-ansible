@@ -1,0 +1,34 @@
+# 核心任务
+- name: Redis
+  hosts: all
+  become: yes
+  become_method: administrator
+  vars_files:
+    - vars/main.yml
+  vars_prompt:
+    - name: 'mysql_selection'
+      prompt: "Choose serial number to install MySQL \n
+      1: MySQL 5.5\n
+      2: MySQL 5.6\n
+      3: MySQL 5.7\n"
+      private: no
+      default: 4
+
+  vars:
+    select_select:
+      '1': "5.5"
+      '2': "5.6"
+      '3': "5.7"
+
+    mysql_version: "{{select_select[mysql_selection]}}"
+    
+  pre_tasks:
+    - debug:
+        msg: this application will be installed, OS is {{ansible_distribution}}
+    
+  roles:
+    - {role: role_common, tags: "role_common"}
+    - {role: role_cloud, tags: "role_cloud"}
+    - {role: sample, tags: "sample"}
+    - {role: role_preend, tags: "role_preend"}
+    - {role: role_end, tags: "role_end"}

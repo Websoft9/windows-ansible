@@ -1,0 +1,25 @@
+- name: Create temporary dirctory 
+  win_file:
+    path: C:\temp
+    state: directory
+
+- name: Download phpstudy
+  win_get_url:
+    url: "{{download_download_url}}"
+    dest: C:\temp\phpstudy.zip
+
+- name: Create temporary dirctory to unzip package
+  win_file:
+    path: C:\temp\phpstudy
+    state: directory
+
+- name: Unarchive package
+  win_unzip:
+    src: C:\temp\phpstudy.zip
+    dest: C:\temp\phpstudy
+
+- name: Install phpstudy
+  win_package: 
+    win_package:
+        path: C:\temp\phpstudy\phpstudy.exe
+        state: present

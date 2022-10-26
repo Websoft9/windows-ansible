@@ -1,0 +1,35 @@
+---
+- name: wampserver
+  hosts: all
+
+  vars_files:
+    - vars/main.yml
+
+  vars_prompt:
+    - name: 'php_choose'
+      prompt: "\nWhich PHP version do you want install?\n\n
+      1: PHP7.2.x\n
+      2: php7.3.x\n
+      3: php7.4.x\n"
+      private: no
+      default: 2
+
+  vars:
+    select_php_ver:
+      '1': '72'
+      '2': '73'
+      '3': '74'
+
+    wamp_version: "{{select_php_ver[php_choose]}}"
+
+  pre_tasks:
+    - debug:
+        msg: WAMP will be installed, version is {{ wamp_version }}, OS is {{ansible_distribution}} }
+
+  roles:
+    - { role: role_common, tags: "role_common" }
+    - { role: role_cloud, tags: "role_cloud" }
+    - { role: role_tools, tags: "role_tools", vars: {tools_dbforge_install: True} }
+    - { role: wamp, tags: "wamp" }
+    # - { role: role_preend, tags: "role_preend" }
+    # - { role: role_end, tags: "role_end" }
